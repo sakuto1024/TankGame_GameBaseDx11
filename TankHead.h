@@ -1,13 +1,13 @@
 #pragma once
 #include "Engine\\GameObject.h"
 
-class Tank : public GameObject
+class TankHead : public GameObject
 {
 public:
 	//コンストラクタ
 	//引数：parent  親オブジェクト（SceneManager）
-	Tank(GameObject* parent);
-	~Tank();
+	TankHead(GameObject* parent);
+	~TankHead();
 
 	//初期化
 	void Initialize() override;
@@ -21,15 +21,7 @@ public:
 	//開放
 	void Release() override;
 
-	
-
 private:
 	int hModel_; //地面モデルのハンドル
-	int camType_;  //カメラの種類
-	void  SetFixedCam();  //固定カメラの処理
-	void SetTPSCam();
-	void SetFPSCam();
-
-	
 };
 
