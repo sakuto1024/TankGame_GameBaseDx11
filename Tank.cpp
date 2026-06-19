@@ -26,7 +26,7 @@ namespace
 
 	};
 
-	TankHead* t;
+	//TankHead* t;
 }
 
 //タンクのボディを表すクラス
@@ -45,16 +45,16 @@ void Tank::Initialize()
 	hModel_ = Model::Load("TankBody.fbx");
 	assert(hModel_ >= 0);  //モデルの読み込みに失敗していないか確認
 
-	t = Instantiate<TankHead>(this->GetParent());
+	//t = Instantiate<TankHead>(this->GetParent());
 	
-	
+	Instantiate<TankHead>(this);  //親をタンクにして砲塔を生成 thisはTank自身
 }
 
 void Tank::Update()
 {
 	
-	t->SetPosition(XMFLOAT3(transform_.position_.x, transform_.position_.y, transform_.position_.z));
-	t->SetRotate(transform_.rotate_);
+	//t->SetPosition(XMFLOAT3(transform_.position_.x, transform_.position_.y, transform_.position_.z));
+	//t->SetRotate(transform_.rotate_);
 
 	if (Input::IsKeyDown(DIK_C)) {
 		camType_ = (camType_ + 1) % CAM_TYPE_MAX;  //0,1,2...CAM_TYPE_MAX-1の順でcamType_を切り替える
@@ -116,22 +116,19 @@ void Tank::Update()
 		break;
 	}
 
-	if (Input::IsKey(DIK_LEFT) || Input::IsKey(DIK_A)) {
+	if ( Input::IsKey(DIK_A)) {
 		transform_.rotate_.y -= 2.0f;
 	}
 
-	else if (Input::IsKey(DIK_RIGHT) || Input::IsKey(DIK_D)) {
+	else if (Input::IsKey(DIK_D)) {
 		transform_.rotate_.y += 2.0f;
 	}
 
-	Debug::Log("CAMTYPE = ");
-	Debug::Log(camType_, true);  //後ろのtrueは改行するかどうか
-
-	
+	//Debug::Log("CAMTYPE = ");
+//	Debug::Log(camType_, true);  //後ろのtrueは改行するかどうか
 
 
-
-	if (Input::IsKey(DIK_UP) || Input::IsKey(DIK_W)) {
+	if (Input::IsKey(DIK_W)) {
 		vPos = vPos + moveSpeed * vMove;
 
 		XMStoreFloat3(&transform_.position_, vPos);  //ストア：書き込み (格納)
@@ -166,5 +163,5 @@ void Tank::Release()
 void Tank::SetFixedCam()
 {
 	Camera::SetTarget(XMFLOAT3(0, 0, 0));
-	Camera::SetPosition(XMFLOAT3(0, 20, -30));
+	Camera::SetPosition(XMFLOAT3(0, 25, -50));
 }
