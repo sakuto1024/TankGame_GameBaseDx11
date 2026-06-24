@@ -8,7 +8,7 @@
 
 
 Enemy::Enemy(GameObject* parent)
-	:GameObject(parent, "Enemy"), hModel_(-1)
+	:GameObject(parent, "Enemy"), hModel_(-1), score_(0)
 {
 	//transform_.position_.x = rand() % 40 - 20;
 	//transform_.position_.z = rand() % 40 - 20;
@@ -20,9 +20,16 @@ Enemy::Enemy(GameObject* parent)
 void Enemy::Initialize()
 {
 	hModel_ = Model::Load("Enemy.fbx");
+
+	//　　　　　　　　　モデルハンドル、開始フレーム、終了フレーム、アニメーション速度
+	Model::SetAnimFrame(hModel_, 1, 100, ((float)(rand() % 300) / 100.0f));
+
 	assert(hModel_ >= 0);  //モデルの読み込みに失敗していないか確認
 
-	BoxCollider* collider = new BoxCollider(XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(1.0f, 1.0f, 1.0f));
+	
+
+	//BoxCollider* collider = new BoxCollider(XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(1.0f, 3.0f, 1.0f));
+	SphereCollider* collider = new SphereCollider(XMFLOAT3(0.0f, 1.0f, 0.0f), 1.0f);
 	AddCollider(collider);
 	
 	
@@ -43,10 +50,13 @@ void Enemy::Update()
 	//transform_.position_.z = randY * sin(0.2f * time);
 
 
-	if ((int)time % 10 >= (rand() % 5) + 4) {
+	if ((int)time % 30 == (rand() % 30)) {
 		transform_.position_.x += (rand() % 200 - 100) / 50;
 		transform_.position_.z += (rand() % 200 - 100) / 50;
 	}
+
+	/*transform_.position_.x += (rand() % 200 - 100) / 50;
+	transform_.position_.z += (rand() % 200 - 100) / 50;*/
 
 	RayCastData data;
 	data.start = transform_.position_;
@@ -67,6 +77,8 @@ void Enemy::Draw()
 {
 	Model::SetTransform(hModel_, transform_);
 	Model::Draw(hModel_);
+
+	
 }
 
 void Enemy::Release()
@@ -79,5 +91,9 @@ void Enemy::OnCollision(GameObject* pTarget)
 	{
 		pTarget->KillMe();  //バレットを消す
 		KillMe();  //自分も消す
+
+		score_++;
 	}
+
+
 }

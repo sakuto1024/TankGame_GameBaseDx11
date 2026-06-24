@@ -33,7 +33,6 @@ namespace
 Tank::Tank(GameObject* parent)
 	:GameObject(parent, "Tank"), hModel_(-1), camType_(FIXED_CAM)
 {	
-	
 }
 
 Tank::~Tank()
@@ -130,6 +129,12 @@ void Tank::Update()
 
 	if (Input::IsKey(DIK_W)) {
 		vPos = vPos + moveSpeed * vMove;
+
+		XMStoreFloat3(&transform_.position_, vPos);  //ストア：書き込み (格納)
+	}
+
+	else if (Input::IsKey(DIK_S)) {
+		vPos = vPos - ((moveSpeed * vMove) * 0.7);
 
 		XMStoreFloat3(&transform_.position_, vPos);  //ストア：書き込み (格納)
 	}

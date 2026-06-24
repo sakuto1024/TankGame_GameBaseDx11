@@ -25,10 +25,15 @@ public:
 
 	void OnCollision(GameObject* pTarget) override;
 
+	void SetScore(int score) { score_ = score; }
+
 private:
 	int hModel_; //タンクモデルのハンドル
+	int hImage_;
 
 	float randX;
 	float randY;
+
+	int score_;  //得点
 };
 

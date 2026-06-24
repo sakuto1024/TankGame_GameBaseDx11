@@ -17,9 +17,12 @@ void Bullet::Initialize()
 	hModel_ = Model::Load("Bullet.fbx");
 	assert(hModel_ >= 0);  //モデルの読み込みに失敗していないか確認
 
-	SphereCollider* collider = new SphereCollider(XMFLOAT3(0.0f, 0.0f, 0.0f), 1.0f);
+	SphereCollider* collider = new SphereCollider(XMFLOAT3(0.0f, 0.0f, 0.0f), 0.3f);
 	AddCollider(collider);
 }
+
+//trueとかfalseがなかったころ
+//0:FALSE  1:TRUE　　ですで表していた
 
 void Bullet::Update()
 {
@@ -36,7 +39,7 @@ void Bullet::Update()
 
 	transform_.position_.y = transform_.position_.y - velocity.y;
 
-	if (transform_.position_.z > 50.0f || transform_.position_.z < -50.0f || transform_.position_.x > 50.0f || transform_.position_.x < -50.0f || transform_.position_.y > 50.0f || transform_.position_.y < -50.0f)
+	if (transform_.position_.y < -50.0f)  //下に行ったら消す
 	{
 		KillMe();  //弾がある程度遠くに行ったら消す
 	}
