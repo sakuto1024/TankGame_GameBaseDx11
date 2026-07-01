@@ -119,7 +119,12 @@
     <ClCompile Include="Enemy.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Char.cpp" />
+    <ClCompile Include="Kusa.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Char.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\BoxCollider.h">
@@ -212,7 +217,12 @@
     <ClInclude Include="Enemy.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Char.h" />
+    <ClInclude Include="Kusa.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Char.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shader\Simple2D.hlsl">
