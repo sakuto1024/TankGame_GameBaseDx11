@@ -2,7 +2,7 @@
 #include "Direct3D.h"
 #include "FbxParts.h"
 
-
+#pragma comment(lib, "bcrypt.lib")
 
 Fbx::Fbx():_animSpeed(0)
 {

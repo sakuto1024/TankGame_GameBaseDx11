@@ -32,7 +32,7 @@ void PlayScene::Initialize()
 
 	}
 
-	Instantiate<Char>(this);
+	//Instantiate<Char>(this);
 
 	//Instantiate<TankHead>(this);
 }
